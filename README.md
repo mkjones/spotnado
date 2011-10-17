@@ -18,4 +18,4 @@ I wrote it with Tornado in Python.
 0.  Install Tornado (http://www.tornadoweb.org/)
 1.  Start up Spotify.
 2.  Run `python spotnado.py`
-3.  Hit http://<your computer's IP>:8888 from your iphone or browser
+3.  Hit http://*your computer's IP*:8888 from your iphone or browser
