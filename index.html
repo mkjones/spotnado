@@ -16,7 +16,7 @@
 
 	.button {
 	  font-size:22pt;
-   	  width: 85%;
+   	  width: 236px;
 	  margin:3px;
 	  height:50px;
 	}
@@ -34,6 +34,33 @@
 	  padding:1px;
 	  font-size:18pt;
 	}
+
+	#volume {
+  	  height:10px;
+	}
+
+	.volumebox {
+	  height:20px;
+	  width:20px;
+	  float:left;
+	  border:1px solid #333;
+	  margin:1px;
+	}
+
+	.filled {
+	  background-color:#222;
+	}
+
+	.volumebutton {
+	  width:20px;
+	  height:20px;
+	  background-color:#eee;
+	  float:left;
+	  border:none;
+	  margin-left:2px;
+	  margin-right:2px;
+	margin-top:2px;
+	}
       </style>
    </head>
    <body>
@@ -50,6 +77,24 @@
 	     </div>
 	   {% end %}
 	 </form>
+       </div>
+       <div id="volume">
+	 <div class="volumecontrol">
+	   <form action="do" method="post">
+	     <input class="volumebutton" type="submit" name="verb" value="-"/>
+	   </form>
+	 </div>
+	 {% for i in xrange(0, volume_filled) %}
+	   <div class="volumebox filled" ></div>
+	 {% end %}
+	 {% for i in xrange(0, volume_empty) %}
+	   <div class="volumebox empty" /></div>
+	 {% end %}
+	 <div class="volumecontrol">
+	   <form action="do" method="post">
+	     <input class="volumebutton" type="submit" name="verb" value="+"/>
+	   </form>
+	 </div>
        </div>
      </div>
    </body>
