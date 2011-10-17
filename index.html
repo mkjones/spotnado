@@ -1,0 +1,56 @@
+<html>
+   <head>
+      <title>Spotify remote</title>
+      <meta name="viewport"
+	    content="width=device-width, initial-scale=1, maximum-scale=1">
+      <style>
+	body {
+  	  background-color:#aaa;
+	}
+
+	#content {
+	  margin:auto;
+	  width:300px;
+  	  text-align:center;
+	}
+
+	.button {
+	  font-size:22pt;
+   	  width: 85%;
+	  margin:3px;
+	  height:50px;
+	}
+
+	.song {
+	  padding:3px;
+	}
+
+	.name {
+	  padding:1px;
+	  font-size:14pt;
+	}
+
+	.artist {
+	  padding:1px;
+	  font-size:18pt;
+	}
+      </style>
+   </head>
+   <body>
+     <div id="content">
+       <div class="song">
+	 <div class="name">{{ track_name }}</div>
+	 <div class="artist">{{ track_artist }}</div>
+       </div>
+       <div id="buttons">
+	 <form action="/do" method="post">
+	   {% for verb in verbs %}
+  	     <div class="buttonrow">
+	       <input class="button" type="submit" name="verb" value="{{ verb }}" />
+	     </div>
+	   {% end %}
+	 </form>
+       </div>
+     </div>
+   </body>
+ </html>
