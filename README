@@ -1,0 +1,11 @@
+I got tired of having to come inside to change the song that
+was on Spotify, modify the volume, etc.  I couldn't find any good
+iphone apps to do this for me, so I wrote this thing.
+
+It basically just executes applescript that actually does the actions
+you tell it, queries information from Spotify, etc.
+
+At first I tried writing it in PHP and just running on Apache, but doing
+that means that whatever applescript you execute runs as the Apache user,
+which (rightfully) doesn't have permissions to touch Spotify.  So instead
+I wrote it with Tornado in Python.
