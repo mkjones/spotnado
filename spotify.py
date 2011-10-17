@@ -23,6 +23,26 @@ class Spotify:
     def getTrackArtist(self):
         return self._get('artist of current track')
 
+    def louder(self):
+        current = self.getVolume()
+        self.setVolume(current + 10)
+
+    def quieter(self):
+        current = self.getVolume()
+        self.setVolume(current - 10)
+
+    def getVolume(self):
+        settings = self._exec('get volume settings')
+        return int(settings.split(':')[1].split(',')[0])
+
+    def setVolume(self, value):
+        if (value > 100):
+            raise Exception('invalid value %d' % (value))
+        if (value < 0):
+            raise Exception('too low value %d' % (value))
+
+        self._exec('set volume output volume %d' % (value))
+
     def getArt(self):
         raw = self._get('artwork of current track')
         data = raw[10:-1]
@@ -40,17 +60,13 @@ class Spotify:
             'artist of current track',
             'name of current track',
             )
-        print thing
-        args = (
-            'osascript',
-            '-e',
-            'tell application "Spotify" to set foo to %s' % (thing),
-            )
-        print args
+        return self._exec('tell application "Spotify" to set foo to %s' % (thing))
+
+    def _tell(self, verb):
+        self._exec('tell application "Spotify" to %s' % (verb))
+
+    def _exec(self, script):
+        args = ('osascript', '-e', script)
         sp = subprocess.Popen(args, stdout=subprocess.PIPE)
         return sp.stdout.readline()
 
-    def _tell(self, verb):
-        args = ('osascript', '-e', 'tell application "Spotify" to %s' % (verb))
-        print args
-        subprocess.Popen(args)

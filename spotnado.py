@@ -6,7 +6,7 @@ import subprocess
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
         s = Spotify()
-        verbs = ['skip']
+        verbs = ['skip', 'louder', 'quieter']
         if s.isPlaying():
             verbs.append('pause')
         else:
@@ -21,7 +21,12 @@ class DoHandler(tornado.web.RequestHandler):
     def post(self):
         verb = self.get_argument('verb')
         s = Spotify()
-        s.tell(verb)
+        if verb== 'louder':
+            s.louder()
+        elif verb == 'quieter':
+            s.quieter()
+        else:
+            s.tell(verb)
 
         self.redirect('/')
 
