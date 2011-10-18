@@ -7,6 +7,8 @@ import tornado.web
 # makes requests to the internet) to reported "internal address"
 # (i.e. the address to which phones on the local network should
 # make a connection in order to control spotify).
+# Props to Ben Newhouse for the idea:
+# https://www.facebook.com/mkjones/posts/933567910263
 class RegisterHandler(tornado.web.RequestHandler):
 
     addrs = {}
