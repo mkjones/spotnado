@@ -1,7 +1,10 @@
 import tornado.ioloop
 import tornado.web
-from spotify import Spotify
 import subprocess
+import socket
+import urllib2
+
+from spotify import Spotify
 
 class MainHandler(tornado.web.RequestHandler):
     def get(self):
@@ -40,6 +43,16 @@ application = tornado.web.Application([
     ])
 
 if __name__ == "__main__":
+    # note the local address and report it to the master so that iphone
+    # clients can simply hit the master's URL, and it'll know where to
+    # redirect them so they hit this server (whatever IP it happens to be on)
+    local_addr = socket.gethostbyname(socket.gethostname())
+    f = urllib2.urlopen("http://localhost:9999/register", "addr=%s" % (local_addr))
+    print "Local address: %s, reported remote address; %s" % (
+        local_addr,
+        f.readline())
+
+    # now start up the app itself
     application.listen(8888)
     tornado.ioloop.IOLoop.instance().start()
 
