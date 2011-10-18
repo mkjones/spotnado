@@ -1,5 +1,6 @@
 import tornado.ioloop
 import tornado.web
+import re
 
 # Runs on a master server somewhere outside the local network.
 # Takes a POST request with a single param ('addr') and stores
@@ -16,6 +17,10 @@ class RegisterHandler(tornado.web.RequestHandler):
     def post(self):
 
         internal_addr = self.get_argument('addr')
+        if not re.match('([\d]{1,3}\.){3}\d{1,3}$', internal_addr):
+            self.write('Invalid addr.')
+            return
+
         external_addr = self.request.remote_ip
         RegisterHandler.addrs[external_addr] = internal_addr
         self.write(external_addr)

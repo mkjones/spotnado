@@ -47,7 +47,7 @@ if __name__ == "__main__":
     # clients can simply hit the master's URL, and it'll know where to
     # redirect them so they hit this server (whatever IP it happens to be on)
     local_addr = socket.gethostbyname(socket.gethostname())
-    f = urllib2.urlopen("http://a.mkjon.es/register", "addr=%s" % (local_addr))
+    f = urllib2.urlopen("http://a.mkjon.es:9999/register", "addr=%s" % (local_addr))
     print "Local address: %s, reported remote address; %s" % (
         local_addr,
         f.readline())
