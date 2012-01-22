@@ -36,7 +36,13 @@ class RedirectLocalHandler(tornado.web.RequestHandler):
         if (internal):
             self.redirect('http://%s:8888/' % (internal))
         else:
-            self.write('unknown address %s' % (remote_ip))
+            out = ''
+            for external, internal in RegisterHandler.addrs.iteritems():
+                out += '<div><a href="%s">external %s and internal %s</a></div>' % (
+                    'http://'+external+':8888',
+                    external,
+                    internal)
+            self.write('unknown address %s.  Other options: %s' % (remote_ip, out))
 
 application = tornado.web.Application([
     (r"/register", RegisterHandler),
