@@ -6,12 +6,15 @@
       <style>
 	body {
   	  background-color:#aaa;
+   	  font-family:Arial;
 	}
 
 	#content {
 	  margin:auto;
 	  width:300px;
+  	  min-height:300px;
   	  text-align:center;
+	  background:url('/art');
 	}
 
 	.button {
@@ -27,12 +30,16 @@
 
 	.name {
 	  padding:1px;
-	  font-size:14pt;
+	  font-size:18pt;
+	  text-shadow:0 0 4px black;
+	  color:white;
 	}
 
 	.artist {
 	  padding:1px;
-	  font-size:18pt;
+	  font-size:24pt;
+	  text-shadow:0 0 4px black;
+	  color:white;
 	}
 
 	#volume {
@@ -40,10 +47,10 @@
 	}
 
 	.volumebox {
-	  height:20px;
-	  width:20px;
+	  height:19px;
+	  width:19px;
 	  float:left;
-	  border:1px solid #333;
+	  border:2px solid #333;
 	  margin:1px;
 	}
 
@@ -68,7 +75,6 @@
        <div class="song">
 	 <div class="name">{{ track_name }}</div>
 	 <div class="artist">{{ track_artist }}</div>
-	 <div class="artwork"><img width="120" height="120" src="/art" /></div>
        </div>
        <div id="buttons">
 	 <form action="/do" method="post">
