@@ -18,4 +18,4 @@ I wrote it with Tornado in Python.
 0.  Install Tornado (http://www.tornadoweb.org/) and Imagemagick (http://www.imagemagick.org).
 1.  Start up Spotify.
 2.  Run `python spotnado.py`
-3.  Hit http://*your computer's IP*:8888 from your iphone or browser
+3.  Hit http://a.mkjon.es:9999 from your iphone or browser
