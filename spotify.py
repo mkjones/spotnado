@@ -1,6 +1,7 @@
 import os
 import subprocess
 import binhex
+import binascii
 
 
 class Spotify:
@@ -45,13 +46,16 @@ class Spotify:
 
     def getArt(self):
         raw = self._get('artwork of current track')
-        data = raw[10:-1]
-        f = open('/tmp/whatever', 'w')
-        f.write(data)
-        f.close
-        binhex.hexbin(open('/tmp/whatever', 'r'),
-                      open('/tmp/whatever.out', 'w'))
-
+        binary = binascii.a2b_hex(raw[11:-3])
+        f = open('/tmp/whatever.tiff', 'w')
+        f.write(binary)
+        f.close()
+        subprocess.Popen(('convert', '/tmp/whatever.tiff',
+                          '/tmp/whatever.jpg')).wait()
+        jpg = open('/tmp/whatever.jpg')
+        ret = jpg.read(1000000)
+        jpg.close()
+        return ret
 
     def _get(self, thing):
         things = (

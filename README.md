@@ -15,7 +15,7 @@ which (rightfully) doesn't have permissions to touch Spotify.  So instead
 I wrote it with Tornado in Python.
 
 # How to use
-0.  Install Tornado (http://www.tornadoweb.org/)
+0.  Install Tornado (http://www.tornadoweb.org/) and Imagemagick (http://www.imagemagick.org).
 1.  Start up Spotify.
 2.  Run `python spotnado.py`
 3.  Hit http://*your computer's IP*:8888 from your iphone or browser

@@ -36,6 +36,9 @@ class RedirectLocalHandler(tornado.web.RequestHandler):
         if (internal):
             self.redirect('http://%s:8888/' % (internal))
         else:
+            self.render('unknown_addr.html',
+                        remote_ip=remote_ip,
+                        all_addrs = RegisterHandler.addrs)
             self.write('unknown address %s' % (remote_ip))
 
 application = tornado.web.Application([

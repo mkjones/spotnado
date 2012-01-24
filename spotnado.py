@@ -37,9 +37,16 @@ class DoHandler(tornado.web.RequestHandler):
 
         self.redirect('/')
 
+class ArtHandler(tornado.web.RequestHandler):
+    def get(self):
+        s = Spotify()
+        self.set_header('Content-Type', 'image/jpeg')
+        self.write(s.getArt())
+
 application = tornado.web.Application([
     (r"/", MainHandler),
     (r"/do", DoHandler),
+    (r"/art", ArtHandler),
     ])
 
 if __name__ == "__main__":
