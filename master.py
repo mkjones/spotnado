@@ -1,6 +1,8 @@
+import re
+import socket
+
 import tornado.ioloop
 import tornado.web
-import re
 
 # Runs on a master server somewhere outside the local network.
 # Takes a POST request with a single param ('addr') and stores
@@ -36,10 +38,14 @@ class RedirectLocalHandler(tornado.web.RequestHandler):
         if (internal):
             self.redirect('http://%s:8888/' % (internal))
         else:
-            self.render('unknown_addr.html',
-                        remote_ip=remote_ip,
-                        all_addrs = RegisterHandler.addrs)
-            self.write('unknown address %s' % (remote_ip))
+            out = ''
+            for external, internal in RegisterHandler.addrs.iteritems():
+                out += '<div><a href="%s">external %s (%s) and internal %s</a></div>' % (
+                    'http://'+internal+':8888',
+                    external,
+                    socket.gethostbyaddr(external)[0],
+                    internal)
+            self.write('unknown address %s.  Other options: %s' % (remote_ip, out))
 
 application = tornado.web.Application([
     (r"/register", RegisterHandler),
